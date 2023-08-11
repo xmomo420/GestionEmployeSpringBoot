@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Authentification</title>
+</head>
+<body>
+<div class="login-container">
+
+    <h1> Bienvenu !</h1>
+    <h2>Authentification</h2>
+
+    <div style="color: red; font-size: 18px; text-align: center; margin-bottom: 20px;"
+         th:if="${param.error}">
+        Combinaison invalide.
+    </div>
+    <div style="color: green;
+            font-size: 18px; text-align: center; margin-bottom: 20px;"
+         th:if="${param.logout}">
+        Vous avez été déconnecté.
+    </div>
+
+    <form th:action="@{/login}" method="post">
+        <div><label> Identifiant : <input type="text" name="username"/> </label></div>
+        <div><label> Mot de passe : <input type="password" name="password"/> </label></div>
+        <div><input type="submit" value="Connexion"/></div>
+    </form>
+
+    <!-- Bouton qui renvoi vers la page de mot de passe oublié -->
+    <a th:href="@{/oubli}"> Mot de passe ou nom d'utilisateur oubliés ? </a>
+    <br>
+    <!-- Bouton pour tester -->
+    <a th:href="@{/menu}"> Test (page menu) </a>
+
+</div>
+
+</body>
+</html>

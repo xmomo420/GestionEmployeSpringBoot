@@ -18,12 +18,12 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/").permitAll()
+                        .requestMatchers("/oubli").permitAll()
                         .anyRequest().authenticated()
-
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
+                        .defaultSuccessUrl("/menu")
                         .permitAll()
                 )
                 .logout(LogoutConfigurer::permitAll);

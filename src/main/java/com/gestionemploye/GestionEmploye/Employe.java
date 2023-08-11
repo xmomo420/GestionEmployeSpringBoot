@@ -4,12 +4,23 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.lang.NonNull;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.security.PrivilegedAction;
 import java.util.Collection;
+import java.util.Collections;
 
 @Entity
+@Table(
+        name = "employe",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "nom_utilisateur_unique",
+                        columnNames = "nom_utilisateur"
+                )
+        }
+)
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -29,6 +40,7 @@ public class Employe implements UserDetails {
     @Column(updatable = false)
     private Long identifiant;
     @Column(
+            name = "nom_utilisateur",
             updatable = false,
             nullable = false
     )
@@ -66,37 +78,37 @@ public class Employe implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + fonction.name()));
     }
 
     @Override
     public String getPassword() {
-        return null;
+        return motDePasse;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return nomUtilisateur;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
 

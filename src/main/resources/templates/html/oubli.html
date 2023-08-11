@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Récuperation de vos identifiants</title>
+</head>
+<body>
+<form th:action="@{/recuperer-mdp}" method="post">
+    <label>Courriel : <input type="email" name="courriel"></label>
+    <input type="submit" value="Connexion"/>
+</form>
+
+</body>
+</html>

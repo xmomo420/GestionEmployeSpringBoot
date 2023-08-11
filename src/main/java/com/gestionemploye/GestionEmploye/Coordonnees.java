@@ -11,8 +11,7 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
         uniqueConstraints = {
             @UniqueConstraint(
                 name = "employe_courriel_unique",
-                columnNames =
-                "courriel"
+                columnNames = "courriel"
         )
     }
 )
