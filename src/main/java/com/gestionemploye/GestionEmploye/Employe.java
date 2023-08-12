@@ -2,12 +2,10 @@ package com.gestionemploye.GestionEmploye;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.lang.NonNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.security.PrivilegedAction;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -120,8 +118,7 @@ public class Employe implements UserDetails {
     }
 
 
-        // Opérations sur la feuille de temps
-
+    // Opérations sur la feuille de temps
     public boolean clockIn() {
             return false;
         }

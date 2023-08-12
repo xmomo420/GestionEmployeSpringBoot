@@ -11,20 +11,20 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 public class EmployeConfig {
 
-    private final BCryptPasswordEncoder  passwordEncoder;
+    /*private final BCryptPasswordEncoder  passwordEncoder;
     @Autowired
     public EmployeConfig(BCryptPasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
     }
+
     @Bean
     CommandLineRunner commandLineRunner(EmployeRepository employeRepository) {
         return args -> {
             Employe employe = employeRepository.findByNomUtilisateur("Premier")
                     .orElse(null);
             assert employe != null;
-            System.out.println(employe.getMotDePasse());
             employe.setMotDePasse(passwordEncoder.encode("abc123"));
             employeRepository.save(employe);
         };
-    }
+    }*/
 }

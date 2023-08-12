@@ -15,6 +15,7 @@
          th:if="${param.error}">
         Combinaison invalide.
     </div>
+
     <div style="color: green;
             font-size: 18px; text-align: center; margin-bottom: 20px;"
          th:if="${param.logout}">
@@ -30,8 +31,6 @@
     <!-- Bouton qui renvoi vers la page de mot de passe oublié -->
     <a th:href="@{/oubli}"> Mot de passe ou nom d'utilisateur oubliés ? </a>
     <br>
-    <!-- Bouton pour tester -->
-    <a th:href="@{/menu}"> Test (page menu) </a>
 
 </div>
 

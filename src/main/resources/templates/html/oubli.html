@@ -5,10 +5,29 @@
     <title>Récuperation de vos identifiants</title>
 </head>
 <body>
-<form th:action="@{/recuperer-mdp}" method="post">
-    <label>Courriel : <input type="email" name="courriel"></label>
-    <input type="submit" value="Connexion"/>
-</form>
+
+<div style="color: red; font-size: 18px; text-align: center; margin-bottom: 20px;"
+     th:if="${error}">
+    <span th:text="${error}"></span>
+</div>
+
+<div style="color: #429309; font-size: 18px; text-align: center; margin-bottom: 20px;"
+     th:if="${succes}">
+    <span th:text="${succes}"></span>
+</div>
+
+<div th:if="${succes == null}">
+    <form th:action="@{/oubli/recuperer-mdp}" method="post">
+        <label>Courriel : <input type="email" name="courriel" required="required"></label>
+        <input type="submit" value="Réinitialiser le mot de passe"/>
+    </form>
+</div>
+
+<div th:if="${succes}">
+    <form th:action="@{/login}" method="get">
+        <button type="submit">Se connecter</button>
+    </form>
+</div>
 
 </body>
 </html>

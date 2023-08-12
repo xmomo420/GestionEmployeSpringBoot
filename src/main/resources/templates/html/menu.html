@@ -5,8 +5,15 @@
     <title>Menu principal</title>
 </head>
 <body>
-    <h1>Pas encore implémenté</h1>
+    <h2>Bienvenu <span th:text="${session.prenom}"></span></h2>
     <p>Afficher une barre horizontale qui affiche les différentes options selon le rôle de la personne connecté : </p>
     <p>Gerer employé, afficher horaire, afficher feuille de temps</p>
+
+    <!-- Bouton permettant de se déconnecter -->
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Déconnexion"/>
+    </form>
+    <!-- Fin -->
+
 </body>
 </html>
