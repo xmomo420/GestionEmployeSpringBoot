@@ -5,18 +5,49 @@
     <title>Ajout nouvel employé</title>
 </head>
 <body>
-    <form>
+    <form th:action="@{/ajouter-employe/confirmer}" method="post">
+        <h3>Informations générales</h3>
         <label>Prenom :
             <input type="text" name="prenom" required="required">
         </label>
         <label>Nom :
             <input type="text" name="nom" required="required">
         </label>
-        <label>Prenom :
-            <input type="text" name="prenom" required="required">
+        <label>Mot de passe :
+            <input type="password" name="motDePasse" required="required">
         </label>
-        <label>Prenom :
-            <input type="text" name="prenom" required="required">
+        <label>Confirmer mot de passe :
+            <input type="password" name="confirmationMotDePasse" required="required">
+        </label>
+        <h3>Coordonnees</h3>
+        <label>Courriel :
+            <input type="email" name="courriel" required="required">
+        </label>
+        <label>Numéro de téléphone :
+            <input type="tel" name="noTelephone" required="required">
+        </label>
+        <label>Numéro et rue :
+            <input type="text" name="rue" required="required">
+        </label>
+        <label>Ville :
+            <input type="text" name="ville" required="required">
+        </label>
+        <label>Province :
+            <select>
+                <option></option>
+                <option></option>
+                <option></option>
+                <option></option>
+                <option></option>
+                <option></option>
+                <option></option>
+                <option></option>
+                <option></option>
+                <option></option>
+            </select>
+        </label>
+        <label>Code postal :
+            <input type="text" name="codePostal" required="required">
         </label>
     </form>
 </body>

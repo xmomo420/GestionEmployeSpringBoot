@@ -29,7 +29,7 @@ public class Coordonnees {
             allocationSize = 1
     )
     @Column(updatable = false)
-    private long id;
+    private Long id;
     private String noTelephone;
     @Column(name = "courriel")
     private String courriel;
