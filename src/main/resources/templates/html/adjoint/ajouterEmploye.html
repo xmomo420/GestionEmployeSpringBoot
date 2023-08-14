@@ -3,52 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <title>Ajout nouvel employé</title>
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="../../css/ajouterEmploye.css">
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Script pour détecter si la confirmation du mot de passe est erronée et pour -->
+    <script src="../../js/ajouterEmploye.js"></script>
 </head>
 <body>
-    <form th:action="@{/ajouter-employe/confirmer}" method="post">
-        <h3>Informations générales</h3>
-        <label>Prenom :
-            <input type="text" name="prenom" required="required">
-        </label>
-        <label>Nom :
-            <input type="text" name="nom" required="required">
-        </label>
-        <label>Mot de passe :
-            <input type="password" name="motDePasse" required="required">
-        </label>
-        <label>Confirmer mot de passe :
-            <input type="password" name="confirmationMotDePasse" required="required">
-        </label>
-        <h3>Coordonnees</h3>
-        <label>Courriel :
-            <input type="email" name="courriel" required="required">
-        </label>
-        <label>Numéro de téléphone :
-            <input type="tel" name="noTelephone" required="required">
-        </label>
-        <label>Numéro et rue :
-            <input type="text" name="rue" required="required">
-        </label>
-        <label>Ville :
-            <input type="text" name="ville" required="required">
-        </label>
-        <label>Province :
-            <select>
-                <option></option>
-                <option></option>
-                <option></option>
-                <option></option>
-                <option></option>
-                <option></option>
-                <option></option>
-                <option></option>
-                <option></option>
-                <option></option>
+
+<div class="container">
+    <h1 class="text-center">Nouvel employé</h1>
+
+    <div class="alert alert-success text-center" th:if="${succes}" th:text="${succes}"></div>
+
+    <form th:if="${succes == null}" id="formulaire" th:action="@{/gestion-employe/ajouter-employe/confirmer}" method="post" class="needs-validation" novalidate>
+        <h2>Informations générales</h2>
+
+        <div class="mb-3">
+            <label for="prenom" class="form-label">Prénom :</label>
+            <input id="prenom" type="text" name="prenom" class="form-control" required="required">
+            <div class="invalid-feedback">
+                Vous devez inscrire votre prénom.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="nom" class="form-label">Nom :</label>
+            <input id="nom" type="text" name="nom" class="form-control" required="required">
+            <div class="invalid-feedback">
+                Vous devez inscrire votre nom.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="motDePasse" class="form-label" th:title="${T(com.gestionemploye.Controllers.AjoutEmployeController).MSG_FORMAT_MDP}">
+                Mot de passe :
+            </label>
+            <input id="motDePasse" type="password" name="motDePasse" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required="required">
+            <div class="invalid-feedback">
+                Vous devez inscrire votre mot de passe selon les critère demandés.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="confirmationMotDePasse" class="form-label">Confirmer mot de passe :</label>
+            <input id="confirmationMotDePasse" type="password" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required="required">
+            <div class="invalid-feedback">
+            Les mots de passe doivent être identique.
+            </div>
+        </div>
+
+        <h2>Coordonnées</h2>
+
+        <div class="alert alert-danger" th:if="${erreur_courriel}" th:text="${erreur_courriel}"></div>
+        <div class="mb-3">
+            <label for="courriel" class="form-label">Courriel :</label>
+            <input id="courriel" type="email" name="courriel" class="form-control" required="required">
+            <div class="invalid-feedback">
+                Vous devez inscrire une adresse courriel valide.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="noTelephone" class="form-label">Numéro de téléphone :</label>
+            <input id="noTelephone" type="tel" name="noTelephone" class="form-control" required="required">
+            <div class="invalid-feedback">
+                Vous devez inscrire un numéro de téléphone valide.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="rue" class="form-label">Numéro et rue :</label>
+            <input id="rue" type="text" name="rue" class="form-control" required="required">
+            <div class="invalid-feedback">
+                Vous devez inscrire votre numéro et la rue de votre résidence.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="ville" class="form-label">Ville :</label>
+            <input id="ville" type="text" name="ville" class="form-control" required="required">
+            <div class="invalid-feedback">
+                Vous devez inscrire la ville.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="province" class="form-label">Province :</label>
+            <select id="province" name="province" class="form-select" required="required">
+                <option th:each="province : ${provinces}" th:value="${province}" th:text="${province}"></option>
             </select>
-        </label>
-        <label>Code postal :
-            <input type="text" name="codePostal" required="required">
-        </label>
+            <div class="invalid-feedback">
+                Vous devez choisir la province.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="codePostal" class="form-label">Code postal :</label>
+            <input id="codePostal" type="text" name="codePostal" class="form-control" required="required" pattern="[A-Za-z]\d[A-Za-z]\d[A-Za-z]\d">
+            <div class="invalid-feedback">
+                Vous devez inscrire votre code postal selon le bon format.
+            </div>
+        </div>
+
+        <h2>Informations employé</h2>
+
+        <div class="mb-3">
+            <label for="tauxHoraire" class="form-label">Taux horaire :</label>
+            <input id="tauxHoraire" type="number" name="tauxHoraire" class="form-control" pattern="^\d+(\.\d{1,2})?$" step="0.05" required="required">
+            <div class="invalid-feedback">
+                Vous devez inscrire votre taux horaire.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="fonction" class="form-label">Fonction :</label>
+            <select id="fonction" name="fonction" class="form-select" required="required">
+                <option th:each="fonction : ${fonctions}" th:value="${fonction}" th:text="${fonction}"></option>
+            </select>
+            <div class="invalid-feedback">
+                Vous devez indiquer votre fonction.
+            </div>
+        </div>
+
+        <div class="form-btn">
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+        </div>
+
     </form>
+
+    <form th:if="${succes}" th:action="@{/gestion-employe/ajouter-employe}">
+        <button type="submit" class="btn btn-secondary">Ajouter un autre employé</button>
+    </form>
+</div>
+
 </body>
 </html>

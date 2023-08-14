@@ -13,7 +13,6 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 public class QuartTravail {
     @Id
     @GeneratedValue(strategy = SEQUENCE)

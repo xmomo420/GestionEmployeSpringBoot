@@ -1,0 +1,48 @@
+/* style.css */
+
+/* Style pour le corps de la page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+}
+
+/* Centrer le contenu */
+.container {
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Style pour les messages d'erreur */
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 14px;
+}
+
+/* Style pour les boutons */
+.btn-primary {
+    font-size: 30px;
+}
+
+/* Style pour le titre du formulaire */
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Centrer le bouton Ajouter avec de la marge en bas */
+.form-btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+/* Style pour les alertes */
+.alert {
+    font-size: 16px;
+    margin-bottom: 20px;
+}

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import static jakarta.persistence.GenerationType.SEQUENCE;
@@ -13,7 +14,6 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 public class Horaire {
     @Id
     @GeneratedValue(strategy = SEQUENCE)
@@ -25,9 +25,8 @@ public class Horaire {
     @Column(updatable = false)
     private Long id;
     @OneToMany(mappedBy = "horaire")
-    private List<QuartTravail> listeQuartsPrevus;
+    private List<QuartTravail> listeQuartsPrevus = new ArrayList<>(7);
     private LocalDate dateAssignation;
     private double nombreHeures;
-
 
 }

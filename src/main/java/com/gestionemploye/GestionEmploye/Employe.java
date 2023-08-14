@@ -6,8 +6,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.Collections;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.util.*;
 
 @Entity
 @Table(
@@ -46,12 +47,13 @@ public class Employe implements UserDetails {
     @Column(nullable = false)
     private String motDePasse;
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Fonction fonction;
     @Column(nullable = false)
     private String prenom;
     @Column(nullable = false)
     private String nom;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(
             name = "coordonnees_id",
             foreignKey = @ForeignKey(name = "reference_table_coordonnees")
@@ -60,13 +62,13 @@ public class Employe implements UserDetails {
     @Column(nullable = false)
     private double tauxHoraire;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(
             name = "horaire_id",
             foreignKey = @ForeignKey(name = "reference_table_horaire")
     )
     private Horaire horaire;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(
             name = "feuille_temps_id",
             foreignKey = @ForeignKey(name = "reference_table_feuille_temps")
@@ -110,14 +112,6 @@ public class Employe implements UserDetails {
     }
 
 
-    public enum Fonction {
-        ADJOINT,
-        ASSOCIE,
-        RH,
-        GERANT
-    }
-
-
     // Opérations sur la feuille de temps
     public boolean clockIn() {
             return false;
@@ -135,6 +129,55 @@ public class Employe implements UserDetails {
             return false;
         }
 
+
+    public String genererNomUtilisateur() {
+        Random random = new Random();
+        String prefix;
+        if (nom.length() >= 3)
+            prefix = nom.substring(0, 2);
+        else
+            prefix = nom.charAt(0) + random.nextInt(100) + "";
+        return prefix + prenom.charAt(0) + random.nextInt(1000);
+    }
+
+    public void ajouterHoraireFeuilleTempsVide() {
+        // Horaire
+        horaire = new Horaire();
+        horaire.setListeQuartsPrevus(creerQuartVides());
+        horaire.setNombreHeures(0d);
+        horaire.setDateAssignation(LocalDate.now());
+        // Feuille de temps
+        feuilleTemps = new FeuilleTemps();
+        feuilleTemps.setListeQuartsTravailles(creerQuartVides());
+        feuilleTemps.setNombreHeureSupplementaire(0);
+        feuilleTemps.setNombreHeuresTravaillees(0);
+    }
+
+    private static List<QuartTravail> creerQuartVides() {
+        List<QuartTravail> quartTravails = new ArrayList<>(7);
+        QuartTravail quartTravailLundi = new QuartTravail();
+        quartTravailLundi.setJour(DayOfWeek.MONDAY);
+        QuartTravail quartTravailMardi = new QuartTravail();
+        quartTravailMardi.setJour(DayOfWeek.TUESDAY);
+        QuartTravail quartTravailMercredi = new QuartTravail();
+        quartTravailMercredi.setJour(DayOfWeek.WEDNESDAY);
+        QuartTravail quartTravailJeudi = new QuartTravail();
+        quartTravailJeudi.setJour(DayOfWeek.THURSDAY);
+        QuartTravail quartTravailVendredi = new QuartTravail();
+        quartTravailVendredi.setJour(DayOfWeek.FRIDAY);
+        QuartTravail quartTravailSamedi = new QuartTravail();
+        quartTravailSamedi.setJour(DayOfWeek.SATURDAY);
+        QuartTravail quartTravailDimanche = new QuartTravail();
+        quartTravailDimanche.setJour(DayOfWeek.SUNDAY);
+        quartTravails.add(quartTravailLundi);
+        quartTravails.add(quartTravailMardi);
+        quartTravails.add(quartTravailMercredi);
+        quartTravails.add(quartTravailJeudi);
+        quartTravails.add(quartTravailVendredi);
+        quartTravails.add(quartTravailSamedi);
+        quartTravails.add(quartTravailDimanche);
+        return quartTravails;
+    }
 
 }
 

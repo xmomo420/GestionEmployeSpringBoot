@@ -1,0 +1,67 @@
+/* Styles personnalisés */
+body {
+    background-color: #7fc935; /* Couleur de fond pour tout le corps de la page */
+}
+
+.navbar {
+    border: 3px solid #022cd0;
+    border-radius: 3px;
+}
+
+#conteneur-entier {
+    background-color: #7fc935;
+}
+
+.navbar-nav {
+    margin-top: 7px;
+    margin-right: 7px;
+    margin-left: 7px;
+    border-radius: 2px;
+}
+
+.navbar-brand {
+    color: #022cd0; /* Couleur du texte pour le lien de la marque */
+    font-size: 26px; /* Taille de police plus grande pour la marque */
+    font-weight: bold;
+    margin-left: 10px;
+    margin-right: 80px;
+}
+
+.nav-link {
+    color: #007bff; /* Couleur du texte pour les liens de navigation */
+    font-size: 22px; /* Taille de police plus grande pour les liens de navigation */
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.container {
+    background-color: #25ffdb; /* Couleur de fond pour les conteneurs */
+    padding: 20px; /* Espacement intérieur du contenu du conteneur */
+    border: 3px solid #022cd0; /* Bordure autour du conteneur */
+    border-radius: 5px; /* Coins arrondis du conteneur */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre autour du conteneur */
+}
+
+.container-fluid.fixed-bottom {
+    border: 3px solid #022cd0;
+    border-radius: 5px; /* Coins arrondis du conteneur */
+    background-color: #25ffdb; /* Couleur de fond pour la section du bas */
+    padding: 10px 0; /* Espacement intérieur du contenu du bas */
+}
+
+input[type="submit"] {
+    background-color: #007bff; /* Couleur de fond pour le bouton */
+    color: white; /* Couleur du texte pour le bouton */
+    font-weight: bold;
+    border: none; /* Supprimez la bordure du bouton */
+    padding: 10px 20px; /* Espacement intérieur du bouton */
+    border-radius: 3px; /* Coins arrondis du bouton */
+    cursor: pointer;
+    margin-top: 10px; /* Espacement vers le haut du bouton */
+}
+
+form {
+    margin-bottom: 10px;
+    margin-left: 15px;
+}
+

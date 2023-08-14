@@ -2,31 +2,47 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Récuperation de vos identifiants</title>
+    <title>Récupération de vos identifiants</title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/oubli.css">
+    <script src="../js/bootstrap.js"></script>
 </head>
 <body>
 
-<div style="color: red; font-size: 18px; text-align: center; margin-bottom: 20px;"
-     th:if="${error}">
-    <span th:text="${error}"></span>
-</div>
+<div class="container">
+    <div class="row justify-content-center align-items-center min-vh-100">
+        <div class="col-lg-6">
+            <h1 class="text-center mb-4">Récupération de votre mot de passe</h1>
 
-<div style="color: #429309; font-size: 18px; text-align: center; margin-bottom: 20px;"
-     th:if="${succes}">
-    <span th:text="${succes}"></span>
-</div>
+            <p class="alert alert-info text-center">
+                Entrez votre adresse courriel pour réinitialiser votre mot de passe.
+            </p>
 
-<div th:if="${succes == null}">
-    <form th:action="@{/oubli/recuperer-mdp}" method="post">
-        <label>Courriel : <input type="email" name="courriel" required="required"></label>
-        <input type="submit" value="Réinitialiser le mot de passe"/>
-    </form>
-</div>
+            <div th:if="${error}" class="alert alert-danger text-center">
+                <span th:text="${error}"></span>
+            </div>
 
-<div th:if="${succes}">
-    <form th:action="@{/login}" method="get">
-        <button type="submit">Se connecter</button>
-    </form>
+            <div th:if="${succes}" class="alert alert-success text-center">
+                <span th:text="${succes}"></span>
+            </div>
+
+            <div th:if="${succes == null}" class="d-flex justify-content-center">
+                <form th:action="@{/oubli/recuperer-mdp}" method="post">
+                    <div class="form-group">
+                        <label class="d-flex justify-content-center" for="courriel">Courriel :</label>
+                        <input type="email" id="courriel" name="courriel" class="form-control" required="required">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Réinitialiser le mot de passe</button>
+                </form>
+            </div>
+
+            <div th:if="${succes}" class="d-flex justify-content-center">
+                <form th:action="@{/login}" method="get">
+                    <button type="submit" class="btn btn-secondary">Se connecter</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 </body>

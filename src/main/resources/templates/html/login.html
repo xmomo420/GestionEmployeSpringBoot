@@ -4,35 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Authentification</title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <script src="../js/bootstrap.js"></script>
 </head>
+
 <body>
-<div class="login-container">
+<div class="container-fluid login-container">
+    <h1 class="text-center"> Bienvenu !</h1>
+    <h2 class="text-center">Authentification</h2>
 
-    <h1> Bienvenu !</h1>
-    <h2>Authentification</h2>
-
-    <div style="color: red; font-size: 18px; text-align: center; margin-bottom: 20px;"
-         th:if="${param.error}">
+    <div class="alert alert-danger text-center" th:if="${param.error}">
         Combinaison invalide.
     </div>
 
-    <div style="color: green;
-            font-size: 18px; text-align: center; margin-bottom: 20px;"
-         th:if="${param.logout}">
+    <div class="alert alert-success text-center" th:if="${param.logout}">
         Vous avez été déconnecté.
     </div>
 
-    <form th:action="@{/login}" method="post">
-        <div><label> Identifiant : <input type="text" name="username"/> </label></div>
-        <div><label> Mot de passe : <input type="password" name="password"/> </label></div>
-        <div><input type="submit" value="Connexion"/></div>
+    <form th:action="@{/login}" method="post" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <label for="username" class="form-label">Identifiant :</label>
+            <input id="username" type="text" class="form-control" name="username" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Mot de passe :</label>
+            <input id="password" type="password" class="form-control" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Connexion</button>
+        <!-- Espacer les 2 éléments -->
+        <br>
+        <br>
+        <a class="btn btn-link" th:href="@{/oubli}">Mot de passe ou nom d'utilisateur oubliés ?</a>
     </form>
-
-    <!-- Bouton qui renvoi vers la page de mot de passe oublié -->
-    <a th:href="@{/oubli}"> Mot de passe ou nom d'utilisateur oubliés ? </a>
-    <br>
-
 </div>
-
 </body>
 </html>

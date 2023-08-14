@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion employés</title>
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../css/horaireEmploye.css">
+    <script src="../../js/bootstrap.js"></script>
+</head>
+<body>
+<div class="container mt-5" th:if="${session.employe.horaire}">
+    <h1 class="mb-4">Horaire de l'employé</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Jour</th>
+            <th>Heure de début</th>
+            <th>Heure de fin</th>
+            <th>Début du repas</th>
+            <th>Fin du repas</th>
+            <th>Nombre d'heures</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="quart : ${session.employe.horaire.listeQuartsPrevus}">
+            <td th:text="${quart.jour}"></td>
+            <td th:text="${quart.heureDebut}"></td>
+            <td th:text="${quart.heureFin}"></td>
+            <td th:text="${quart.debutRepas}"></td>
+            <td th:text="${quart.finRepas}"></td>
+            <td th:text="${quart.nombreHeures}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

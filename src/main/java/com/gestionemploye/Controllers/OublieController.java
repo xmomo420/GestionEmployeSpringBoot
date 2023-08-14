@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -53,8 +55,8 @@ public class OublieController {
                // Afficher que le mot de passe a été changé avec succès
                final String MSG_SUCCES = "Le mot de passe a été reinitialisé avec succès.\n" +
                        "Un courriel contenant le mot de passe a été envoyé à l'adresse : " +
-                       courriel + "\nVous devez maintenant vous connecter avec votre nouveau mot de passe en cliquant sur" +
-                       "le bouton : \"Se conncecter\".";
+                       courriel + ".\nVous devez maintenant vous connecter avec votre nouveau mot de passe en cliquant sur" +
+                       " le bouton ci-dessous.";
                redirectAttributes.addFlashAttribute("succes", MSG_SUCCES);
                // Envoyer le mot de passe au courriel récuperé
                String messageCourriel = "Voici votre nouveau mot de passe : " + motDePasseRaw;

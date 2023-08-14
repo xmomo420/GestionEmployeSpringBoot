@@ -33,7 +33,7 @@ public class Coordonnees {
     private String noTelephone;
     @Column(name = "courriel")
     private String courriel;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(
             name = "adresse_id",
             foreignKey = @ForeignKey(name = "reference_table_adresse")

@@ -1,0 +1,24 @@
+/* Ajoutez des styles personnalisés ici */
+
+.search-container {
+    justify-content: flex-end;
+}
+
+.pagination {
+    margin-top: 20px;
+}
+
+.titre {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+#horaire {
+    background-color: chocolate;
+}
+
+#feuilleTemps {
+    background-color: #d3dc39;
+    color: red;
+}
+

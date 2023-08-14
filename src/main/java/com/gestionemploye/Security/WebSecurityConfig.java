@@ -1,6 +1,7 @@
 package com.gestionemploye.Security;
 
 import com.gestionemploye.GestionEmploye.Employe;
+import com.gestionemploye.GestionEmploye.Fonction;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.NonNull;
@@ -21,8 +22,7 @@ public class WebSecurityConfig {
     public AuthenticationSuccessHandler authenticationSuccessHandler() {
         return (request, response, authentication) -> {
             Employe employe = (Employe) authentication.getPrincipal();
-            String prenom = employe.getPrenom();
-            request.getSession().setAttribute("prenom", prenom);
+            request.getSession().setAttribute("employe", employe);
             response.sendRedirect("/");
         };
     }
@@ -32,7 +32,8 @@ public class WebSecurityConfig {
         SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/oubli/**").permitAll()
+                        .requestMatchers("/oubli/**", "/css/**", "/js/**").permitAll()
+                        .requestMatchers("/gestion-employe/**").hasRole(Fonction.ADJOINT.name())
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form

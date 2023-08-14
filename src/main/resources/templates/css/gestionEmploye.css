@@ -1,0 +1,81 @@
+/* Ajoutez des styles personnalisés ici */
+
+/* Style pour le corps de la page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+}
+
+/* Style pour les sous-conteneurs */
+.sub-container {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    text-align: center; /* Ajout de cette propriété pour centrer le contenu */
+}
+
+/* Centrer le texte des titres des sous-conteneurs */
+.sub-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Centrer les boutons des sous-conteneurs */
+.sub-container .btn {
+    display: block;
+    margin: 0 auto;
+}
+
+/* Style pour le conteneur principal */
+.container {
+    min-height: 100vh; /* Hauteur minimale de la fenêtre visible */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Style pour les titres */
+h1, h2 {
+    color: #333;
+}
+
+/* Style pour les paragraphes */
+p {
+    color: #666;
+}
+
+/* Style pour les boutons */
+.btn {
+    border-radius: 25px;
+}
+
+/* Style pour la séparation entre les sous-conteneurs */
+.separator {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-top: 1px solid #ddd;
+}
+
+/* Étirer les sous-conteneurs pour aligner les boutons à la même hauteur */
+.row {
+    display: flex;
+    align-items: stretch;
+    justify-content: center; /* Centrer les sous-conteneurs horizontalement */
+}
+
+/* Style pour le bouton personnalisé */
+.custom-btn {
+    background-color: #f39c12; /* Couleur de fond */
+    border-color: #f39c12; /* Couleur de la bordure */
+    color: #fff; /* Couleur du texte */
+}

@@ -3,6 +3,7 @@ package com.gestionemploye.GestionEmploye;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static jakarta.persistence.GenerationType.SEQUENCE;
@@ -12,7 +13,6 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 public class FeuilleTemps {
     @Id
     @GeneratedValue(strategy = SEQUENCE)
@@ -26,7 +26,7 @@ public class FeuilleTemps {
     @OneToMany(
             mappedBy = "feuilleTemps"
     )
-    private List<QuartTravail> listeQuartsTravailles;
+    private List<QuartTravail> listeQuartsTravailles = new ArrayList<>(7);
     private double nombreHeuresTravaillees;
     // Propore à FeuilleTemps
     private double nombreHeureSupplementaire;

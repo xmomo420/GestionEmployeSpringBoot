@@ -1,30 +1,33 @@
-package com.gestionemploye.Config;
+/*package com.gestionemploye.Config;
 
-import com.gestionemploye.GestionEmploye.Employe;
 import com.gestionemploye.Repository.*;
+import com.gestionemploye.Service.EmployeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 
 @Configuration
 public class EmployeConfig {
+    private final EmployeRepository employeRepository;
+    private final EmployeService employeService;
 
-    /*private final BCryptPasswordEncoder  passwordEncoder;
     @Autowired
-    public EmployeConfig(BCryptPasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
+    public EmployeConfig(EmployeRepository employeRepository, EmployeService employeService) {
+        this.employeRepository = employeRepository;
+        this.employeService = employeService;
     }
+
 
     @Bean
     CommandLineRunner commandLineRunner(EmployeRepository employeRepository) {
-        return args -> {
-            Employe employe = employeRepository.findByNomUtilisateur("Premier")
-                    .orElse(null);
-            assert employe != null;
-            employe.setMotDePasse(passwordEncoder.encode("abc123"));
-            employeRepository.save(employe);
-        };
-    }*/
-}
+
+        return args ->
+            employeRepository.findAll().forEach(employe ->
+            {
+            employe.ajouterHoraireFeuilleTempsVide();
+            employeService.ajouterEmploye(employe);
+            });
+    }
+}*/

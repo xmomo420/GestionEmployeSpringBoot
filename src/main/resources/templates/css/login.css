@@ -1,0 +1,78 @@
+/* login.css */
+
+/* Style pour le corps de la page */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+}
+
+/* Centrer le contenu */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #022cd0; /* Couleur de fond */
+}
+
+/* Style pour le formulaire */
+form {
+    text-align: center; /* Centrage horizontal */
+    margin: 0 auto; /* Centrage horizontal */
+    border: 6px solid #26dc0d;
+    padding: 20px;
+    background-color: #25ffdb;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 500px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333; /* Couleur du texte */
+    text-align: center;
+}
+
+input[type="text"],
+input[type="password"] {
+    padding: 10px;
+    margin: 0 auto; /* Centrage horizontal */
+    display: block;
+    border: 3px solid #022cd0;
+    border-radius: 3px;
+}
+
+input[type="submit"] {
+    background-color: #022cd0;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* Styles pour le lien "Mot de passe oublié" */
+a {
+    color: #022cd0;
+}
+
+/* Style pour les titres */
+h1, h2 {
+    color: #26dc0d;
+}
+
+h1 {
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
+br {
+    margin-top: 15px;
+}

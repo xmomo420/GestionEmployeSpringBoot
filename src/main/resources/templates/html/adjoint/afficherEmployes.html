@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion employés</title>
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../css/afficherEmployes.css">
+    <script src="../../js/bootstrap.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center mb-5">Liste des employés</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="input-group mb-3 search-container">
+                <label>
+                    <input type="text" class="form-control" placeholder="Rechercher un employé...">
+                </label>
+                <button class="btn btn-outline-secondary" type="button">Rechercher</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="list-group">
+                <!-- Utiliser Thymeleaf pour itérer sur la liste d'employés -->
+                <li th:each="employe : ${employes}" class="list-group-item">
+                    <!-- Afficher les détails de l'employé (prenom, nom et fonction) -->
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex">
+                            <span class="titre">Nom de l'employé :</span>
+                            <span th:text="${employe.prenom + ' ' + employe.nom}"></span> <!-- Premier élément sans bordure -->
+                        </div>
+                        <!-- Reste des éléments il faut une bordure à gauche -->
+                        <div class="d-flex">
+                            <span class="titre">Fonction :</span>
+                            <span th:text="${employe.fonction.name()}"></span>
+                        </div>
+                        <!-- Ajouter d'autres éléments si possibles -->
+                        <div class="d-flex">
+                            <span class="titre">Courriel :</span>
+                            <span th:text="${employe.coordonnees.courriel}"></span>
+                        </div>
+                        <div class="d-flex">
+                            <form th:action="@{/gestion-employe/afficher-employes/horaire-emplpye}" method="post">
+                                <label>
+                                    <input style="display: none" name="employe" th:value="${employe}">
+                                </label>
+                                <button id="horaire" type="submit" class="btn btn-secondary">Horaire</button>
+                            </form>
+                            <form th:if="${session.employe.fonction == T(com.gestionemploye.GestionEmploye.Fonction).ADJOINT}"
+                                  th:action="@{/gestion-employe/afficher-employes/feuille-temps}" method="post">
+                                <label>
+                                    <input style="display: none" name="employe" th:value="${employe}">
+                                </label>
+                                <button id="feuilleTemps" type="submit" class="btn btn-secondary">Feuille de temps</button>
+                            </form>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Précédent</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Suivant</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+</body>
+</html>
