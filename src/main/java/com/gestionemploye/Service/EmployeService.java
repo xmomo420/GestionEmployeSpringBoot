@@ -63,5 +63,10 @@ public class EmployeService implements UserDetailsService {
         entityManager.persist(nouvelEmploye.getCoordonnees().getAdresse());
     }
 
+    @Transactional
+    public void modifierHoraire(Horaire horaire) {
+
+    }
+
 
 }

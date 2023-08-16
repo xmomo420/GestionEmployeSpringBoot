@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion employés</title>
+    <link rel="stylesheet" th:href="@{../css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{../css/horaireEmploye.css}">
+    <script th:src="@{../../js/bootstrap.js}"></script>
+</head>
+<body>
+<div class="class=alert alert-danger text-center" th:if="${horaire == null}" th:text="horaire_null"></div>
+
+<div class="container-fluid mt-5 center-vertically" th:if="${horaire}"> <!-- Pour s'assurer que l'horaire n'est pas null -->
+    <div class="text-center">
+        <h1 class="mb-4">Horaire de <span style="font-style: italic" th:text="${nom}"></span> </h1>
+    </div>
+    <div class="mb-3">
+        <form th:action="@{/}" method="get">
+            <button type="submit" class="btn btn-lg btn-secondary">Menu principal</button>
+        </form>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col" class="fixed-width text-center"></th>
+                <th scope="col" class="text-center">Lundi</th>
+                <th scope="col" class="text-center">Mardi</th>
+                <th scope="col" class="text-center">Mercredi</th>
+                <th scope="col" class="text-center">Jeudi</th>
+                <th scope="col" class="text-center">Vendredi</th>
+                <th scope="col" class="text-center">Samedi</th>
+                <th scope="col" class="text-center">Dimanche</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Pour chaque quart dans l'horaire, afficher dans la colonne, dans cet ordre, heureDebut, debutRepas, finRepas et heureFin -->
+            <tr>
+                <th scope="row" class="text-center">Heure de début</th>
+                <!-- Pour chaque quart dans l'horaire, afficher les heures de début -->
+                <td class="text-center" th:each="quart : ${horaire.listeQuartsPrevus}" th:text="${quart.heureDebut}"></td>
+            </tr>
+            <tr>
+                <th scope="row" class="text-center">Début du repas</th>
+                <!-- Pour chaque quart dans l'horaire, afficher les débuts de repas -->
+                <td class="text-center" th:each="quart : ${horaire.listeQuartsPrevus}" th:text="${quart.debutRepas}"></td>
+            </tr>
+            <tr>
+                <th scope="row" class="text-center">Fin du repas</th>
+                <!-- Pour chaque quart dans l'horaire, afficher les fins de repas -->
+                <td class="text-center" th:each="quart : ${horaire.listeQuartsPrevus}" th:text="${quart.finRepas}"></td>
+            </tr>
+            <tr>
+                <th scope="row" class="text-center">Heure de fin</th>
+                <!-- Pour chaque quart dans l'horaire, afficher les heures de fin -->
+                <td class="text-center" th:each="quart : ${horaire.listeQuartsPrevus}" th:text="${quart.heureFin}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="mb-3 text-center">
+        <form th:action="@{/dispos}" method="get">
+            <button type="submit" class="btn btn-lg btn-primary">Disponibilités</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+/* Personnalisation de la largeur de la cellule titre */
+.fixed-width {
+    width: 150px; /* Définir la largeur souhaitée */
+}
+
+/* Personnalisation des bordures du tableau */
+.table-bordered th,
+.table-bordered td {
+    border: 2px solid #dee2e6; /* Modifier l'épaisseur et la couleur des bordures ici */
+}
+
+ .form-label {
+     display: block;
+     min-width: 200px; /* Ajuste la largeur minimale en fonction de tes besoins */
+     margin-bottom: 10px; /* Espace entre les labels */
+ }
+
+ #formulaire {
+     border: 2px solid #dee2e6; /* Modifier l'épaisseur et la couleur des bordures ici */
+     border-radius: 3px;
+ }
+
+ #contenuFormulaire {
+     border: 2px solid #dee2e6; /* Modifier l'épaisseur et la couleur des bordures ici */
+     border-top: none;
+ }
+
+ #jourSemaine {
+     border-bottom: 4px solid #dee2e6;
+ }
+
+#btnConfirmer,
+#btnAnnuler
+{
+     margin-right: 25px;
+ }
+
+.center-vertically {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#boutonsForm {
+    margin-bottom: 25px;
+}
+
+

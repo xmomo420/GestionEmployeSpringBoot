@@ -75,7 +75,20 @@ public class Employe implements UserDetails {
     )
     private FeuilleTemps feuilleTemps;
 
+    /*
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(
+            name = "dispos_id",
+            foreignKey = @ForeignKey(name = "reference_table_dispos")
+    )
+    private Disponibilités dispos;
 
+
+
+
+     */
+
+    // Implémentation de l'interface UserDetails
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + fonction.name()));
@@ -110,25 +123,6 @@ public class Employe implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-
-    // Opérations sur la feuille de temps
-    public boolean clockIn() {
-            return false;
-        }
-
-    public boolean clockOut() {
-            return false;
-        }
-
-    public boolean debutRepas() {
-            return false;
-        }
-
-    public boolean finRepas() {
-            return false;
-        }
-
 
     public String genererNomUtilisateur() {
         Random random = new Random();

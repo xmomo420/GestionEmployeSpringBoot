@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion employés</title>
+    <link rel="stylesheet" th:href="@{../../css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{../css/profil.css}">
+    <script th:src="@{../../js/bootstrap.js}"></script>
+</head>
+<body>
+<div class="profile-container">
+    <div th:if="${session.employe}">
+        <div class="profile-header">Informations générales</div>
+        <div>
+            <p><span class="profile-label">Prénom:</span> <span th:text="${session.employe.prenom}"></span></p>
+            <p><span class="profile-label">Nom:</span> <span th:text="${session.employe.nom}"></span></p>
+        </div>
+        <hr>
+        <div class="profile-header">Coordonnées</div>
+        <div>
+            <p><span class="profile-label">Téléphone:</span> <span th:text="${session.employe.coordonnees.noTelephone}"></span></p>
+            <p><span class="profile-label">Courriel:</span> <span th:text="${session.employe.coordonnees.courriel}"></span></p>
+            <p><span class="profile-label">Adresse:</span> <span th:text="${session.employe.coordonnees.adresse.rue}"></span></p>
+            <p><span class="profile-label">Ville:</span> <span th:text="${session.employe.coordonnees.adresse.ville}"></span></p>
+            <p><span class="profile-label">Province:</span> <span th:text="${session.employe.coordonnees.adresse.province}"></span></p>
+            <p><span class="profile-label">Code postal:</span> <span th:text="${session.employe.coordonnees.adresse.codePostal}"></span></p>
+        </div>
+        <hr>
+        <div class="profile-header">Information employé</div>
+        <div>
+            <p><span class="profile-label">Nom d'utilisateur:</span> <span th:text="${session.employe.nomUtilisateur}"></span></p>
+            <p><span class="profile-label">Fonction:</span> <span th:text="${session.employe.fonction}"></span></p>
+            <p><span class="profile-label">Taux horaire:</span> <span th:text="${session.employe.tauxHoraire}"></span></p>
+        </div>
+    </div>
+    <hr>
+    <div class="text-center">
+        <form th:action="@{/}" method="get">
+            <button type="submit" class="btn btn-primary btn-block">Menu principal</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Récupération de vos identifiants</title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/feuilleTemps.css">
+    <script src="../js/bootstrap.js"></script>
+</head>
+<body>
+<div class="class=alert alert-danger text-center" th:if="${feuille == null}" th:text="feuille_null"></div>
+
+<div class="container-fluid mt-5 center-vertically" th:if="${feuille}"> <!-- Pour s'assurer que l'horaire n'est pas null -->
+    <div class="text-center">
+        <h1 class="mb-4">Feuille de temps de <span style="font-style: italic" th:text="${nom}"></span> </h1>
+    </div>
+    <div class="mb-3">
+        <form th:action="@{/}" method="get">
+            <button type="submit" class="btn btn-lg btn-secondary">Menu principal</button>
+        </form>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col" class="fixed-width text-center"></th>
+                <th scope="col" class="text-center">Lundi</th>
+                <th scope="col" class="text-center">Mardi</th>
+                <th scope="col" class="text-center">Mercredi</th>
+                <th scope="col" class="text-center">Jeudi</th>
+                <th scope="col" class="text-center">Vendredi</th>
+                <th scope="col" class="text-center">Samedi</th>
+                <th scope="col" class="text-center">Dimanche</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Pour chaque quart dans l'horaire, afficher dans la colonne, dans cet ordre, heureDebut, debutRepas, finRepas et heureFin -->
+            <tr>
+                <th scope="row" class="text-center">Heure de début</th>
+                <!-- Pour chaque quart dans l'horaire, afficher les heures de début -->
+                <td class="text-center" th:each="quart : ${feuille.listeQuartsTravailles}" th:text="${#temporals.format(quart.heureDebut, 'HH:mm')}"></td>
+            </tr>
+            <tr>
+                <th scope="row" class="text-center">Début du repas</th>
+                <!-- Pour chaque quart dans l'horaire, afficher les débuts de repas -->
+                <td class="text-center" th:each="quart : ${feuille.listeQuartsTravailles}" th:text="${#temporals.format(quart.debutRepas, 'HH:mm')}"></td>
+            </tr>
+            <tr>
+                <th scope="row" class="text-center">Fin du repas</th>
+                <!-- Pour chaque quart dans l'horaire, afficher les fins de repas -->
+                <td class="text-center" th:each="quart : ${feuille.listeQuartsTravailles}" th:text="${#temporals.format(quart.finRepas, 'HH:mm')}"></td>
+            </tr>
+            <tr>
+                <th scope="row" class="text-center">Heure de fin</th>
+                <!-- Pour chaque quart dans l'horaire, afficher les heures de fin -->
+                <td class="text-center" th:each="quart : ${feuille.listeQuartsTravailles}" th:text="${#temporals.format(quart.heureFin, 'HH:mm')}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div style="display: flex" class="mb-3 justify-content-center">
+        <form th:action="@{/feuille-temps}" method="post">
+            <label>
+                <input style="display: none" name="action" th:value=1>
+            </label>
+            <button type="submit" class="btn btn-lg btn-primary btn-success boutons">Début</button>
+        </form>
+        <form th:action="@{/feuille-temps}" method="post">
+            <label>
+                <input style="display: none" name="action" th:value=2>
+            </label>
+            <button type="submit" class="btn btn-lg btn-primary boutons">Début repas</button>
+        </form>
+        <form th:action="@{/feuille-temps}" method="post">
+            <label>
+                <input style="display: none" name="action" th:value=3>
+            </label>
+            <button type="submit" class="btn btn-lg btn-primary btn-dark boutons">Fin repas</button>
+        </form>
+        <form th:action="@{/feuille-temps}" method="post">
+            <label>
+                <input style="display: none" name="action" th:value=4>
+            </label>
+            <button type="submit" class="btn btn-lg btn-primary btn-danger boutons">Fin</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

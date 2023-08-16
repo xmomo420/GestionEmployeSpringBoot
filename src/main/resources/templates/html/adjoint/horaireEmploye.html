@@ -3,36 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <title>Gestion employés</title>
-    <link rel="stylesheet" href="../../css/bootstrap.css">
-    <link rel="stylesheet" href="../../css/horaireEmploye.css">
-    <script src="../../js/bootstrap.js"></script>
+    <link rel="stylesheet" th:href="@{../../css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{../../css/horaireEmploye.css}">
+    <script th:src="@{../../js/bootstrap.js}"></script>
+    <script th:src="@{../../js/horaireEmploye.js}"></script>
 </head>
 <body>
-<div class="container mt-5" th:if="${session.employe.horaire}">
-    <h1 class="mb-4">Horaire de l'employé</h1>
+<div class="class=alert alert-danger text-center" th:if="${horaire_null}" th:text="horaire_null"></div>
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Jour</th>
-            <th>Heure de début</th>
-            <th>Heure de fin</th>
-            <th>Début du repas</th>
-            <th>Fin du repas</th>
-            <th>Nombre d'heures</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="quart : ${session.employe.horaire.listeQuartsPrevus}">
-            <td th:text="${quart.jour}"></td>
-            <td th:text="${quart.heureDebut}"></td>
-            <td th:text="${quart.heureFin}"></td>
-            <td th:text="${quart.debutRepas}"></td>
-            <td th:text="${quart.finRepas}"></td>
-            <td th:text="${quart.nombreHeures}"></td>
-        </tr>
-        </tbody>
-    </table>
+<div class="container-fluid mt-5 center-vertically" th:if="${horaire}"> <!-- Pour s'assurer que l'horaire n'est pas null -->
+    <div class="text-center">
+        <h1 class="mb-4">Horaire de <span style="font-style: italic" th:text="${nom}"></span> </h1>
+    </div>
+    <div style="display: flex" class="mb-3">
+        <form th:action="@{/}" method="get">
+            <button type="submit" class="btn btn-lg btn-secondary">Menu principal</button>
+        </form>
+        <form style="margin-left: auto" th:action="@{/gestion-employe/afficher-employes}" method="get">
+            <button style="background-color: chocolate" type="submit" class="btn btn-lg btn-secondary">Gérer employés</button>
+        </form>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col" class="fixed-width text-center"></th>
+                <th scope="col" class="text-center">Lundi</th>
+                <th scope="col" class="text-center">Mardi</th>
+                <th scope="col" class="text-center">Mercredi</th>
+                <th scope="col" class="text-center">Jeudi</th>
+                <th scope="col" class="text-center">Vendredi</th>
+                <th scope="col" class="text-center">Samedi</th>
+                <th scope="col" class="text-center">Dimanche</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Pour chaque quart dans l'horaire, afficher dans la colonne, dans cet ordre, heureDebut, debutRepas, finRepas et heureFin -->
+            <tr>
+                <th scope="row" class="text-center">Heure de début</th>
+                <!-- Pour chaque quart dans l'horaire, afficher les heures de début -->
+                <td class="text-center" th:each="quart : ${horaire.listeQuartsPrevus}" th:text="${quart.heureDebut}"></td>
+            </tr>
+            <tr>
+                <th scope="row" class="text-center">Début du repas</th>
+                <!-- Pour chaque quart dans l'horaire, afficher les débuts de repas -->
+                <td class="text-center" th:each="quart : ${horaire.listeQuartsPrevus}" th:text="${quart.debutRepas}"></td>
+            </tr>
+            <tr>
+                <th scope="row" class="text-center">Fin du repas</th>
+                <!-- Pour chaque quart dans l'horaire, afficher les fins de repas -->
+                <td class="text-center" th:each="quart : ${horaire.listeQuartsPrevus}" th:text="${quart.finRepas}"></td>
+            </tr>
+            <tr>
+                <th scope="row" class="text-center">Heure de fin</th>
+                <!-- Pour chaque quart dans l'horaire, afficher les heures de fin -->
+                <td class="text-center" th:each="quart : ${horaire.listeQuartsPrevus}" th:text="${quart.heureFin}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="text-center mt-4">
+            <button onclick="afficherFormulaire()" id="modifyButton" class="btn btn-lg btn-primary">Modifier</button>
+        </div>
+    </div>
+    <!-- Formulaire qui sera invisible avant d'avoir appuyer sur le bouton -->
+    <h2 style="display: none" id="titreForm" class="text-center">Modifier l'horaire</h2>
+    <form id="formulaire" style="display: none" th:object="${horaire}" th:action="@{/gestion-employe/afficher-employes/horaire-employe/modifier}" method="post">
+        <div id="contenuFormulaire" class="container-fluid mt-3 text-center" th:each="quart, iterStat : *{listeQuartsPrevus}">
+            <h3 id="jourSemaine" th:text="${quart.jour}"></h3>
+            <label class="form-label h5">Heure de début
+                <br>
+                <input class="form-control text-center" type="time" th:field="*{listeQuartsPrevus[__${iterStat.index}__].heureDebut}" th:value="${quart.heureDebut}">
+            </label>
+            <label class="form-label h5">Début du repas
+                <br>
+                <input class="form-control text-center" type="time" th:field="*{listeQuartsPrevus[__${iterStat.index}__].debutRepas}" th:value="${quart.debutRepas}">
+            </label>
+            <label class="form-label h5">Fin du repas
+                <br>
+                <input class="form-control text-center" type="time" th:field="*{listeQuartsPrevus[__${iterStat.index}__].finRepas}" th:value="${quart.finRepas}">
+            </label>
+            <label class="form-label h5">Heure de fin
+                <br>
+                <input class="form-control text-center" type="time" th:field="*{listeQuartsPrevus[__${iterStat.index}__].heureFin}" th:value="${quart.heureFin}">
+            </label>
+            <label>
+                <input style="display: none" type="text" th:field="*{listeQuartsPrevus[__${iterStat.index}__].jour}" th:value="${quart.jour}">
+            </label>
+        </div>
+        <label>
+            <input style="display: none" name="idHoraire" th:value="${horaire.id}">
+        </label>
+    </form>
+    <div id="boutonsForm" class="mt-4 d-flex justify-content-center">
+        <button style="display: none" id="btnConfirmer" class="btn btn-lg btn-primary" type="submit" form="formulaire">Confirmer</button>
+        <button style="display: none" id="btnAnnuler" class="btn btn-lg btn-primary btn-dark" type="button" onclick="annulerForm()">Annuler</button>
+        <button style="display: none" id="btnReset" class="btn btn-lg btn-primary btn-danger" type="button" onclick="resetForm()">Réinitialiser</button>
+    </div>
 </div>
 </body>
 </html>

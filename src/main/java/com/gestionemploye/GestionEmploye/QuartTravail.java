@@ -2,6 +2,7 @@ package com.gestionemploye.GestionEmploye;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.lang.NonNull;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -13,7 +14,8 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 @AllArgsConstructor
 @Getter
 @Setter
-public class QuartTravail {
+@ToString
+public class QuartTravail implements Comparable<QuartTravail>{
     @Id
     @GeneratedValue(strategy = SEQUENCE)
     @SequenceGenerator(
@@ -47,4 +49,19 @@ public class QuartTravail {
             foreignKey = @ForeignKey(name = "reference_table_horaire")
     )
     private Horaire horaire;
+
+    @Override
+    public int compareTo(QuartTravail autreQuart) {
+        return this.jour.compareTo(autreQuart.jour);
+    }
+
+    /*
+    // Gerer la relation avec Disponibilites
+    @ManyToOne
+    @JoinColumn(
+            name = "dispos_id",
+            foreignKey = @ForeignKey(name = "reference_table_dispos")
+    )
+    private Disponibilites dispos;
+     */
 }
