@@ -59,8 +59,10 @@ public class OublieController {
                        " le bouton ci-dessous.";
                redirectAttributes.addFlashAttribute("succes", MSG_SUCCES);
                // Envoyer le mot de passe au courriel récuperé
-               String messageCourriel = "Voici votre nouveau mot de passe : " + motDePasseRaw;
-               String objetCourriel = "Récuperation mot de passe";
+               String messageCourriel =
+                       "Voici votre nom d'utilisateur : " + employe.getNomUtilisateur() +
+                       "\nVoici votre nouveau mot de passe : " + motDePasseRaw;
+               String objetCourriel = "Récuperation identifiants";
                emailService.envoyerCourriel(courriel, objetCourriel, messageCourriel);
                // Déconnecter l'utilisateur
                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

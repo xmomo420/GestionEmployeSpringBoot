@@ -4,6 +4,7 @@ import com.gestionemploye.GestionEmploye.Adresse;
 import com.gestionemploye.GestionEmploye.Coordonnees;
 import com.gestionemploye.GestionEmploye.Employe;
 import com.gestionemploye.GestionEmploye.Fonction;
+import com.gestionemploye.Mail.EmailService;
 import com.gestionemploye.Repository.CoordonneesRepository;
 import com.gestionemploye.Repository.EmployeRepository;
 import com.gestionemploye.Service.EmployeService;
@@ -26,6 +27,7 @@ public class AjoutEmployeController {
     private final CoordonneesRepository coordonneesRepository;
     private final PasswordEncoder passwordEncoder;
     private final EmployeService employeService;
+    private final EmailService emailService;
     public static final String MSG_FORMAT_MDP =
             "Le mot de passe doit contenir au moins 8 caractères, y compris au moins une lettre majuscule, une lettre minuscule et un chiffre.";
 
@@ -33,11 +35,12 @@ public class AjoutEmployeController {
     public AjoutEmployeController(EmployeRepository employeRepository,
                                   CoordonneesRepository coordonneesRepository,
                                   PasswordEncoder passwordEncoder,
-                                  EmployeService employeService) {
+                                  EmployeService employeService, EmailService emailService) {
         this.employeRepository = employeRepository;
         this.coordonneesRepository = coordonneesRepository;
         this.passwordEncoder = passwordEncoder;
         this.employeService = employeService;
+        this.emailService = emailService;
     }
 
     @GetMapping("/gestion-employe/ajouter-employe")
@@ -112,8 +115,12 @@ public class AjoutEmployeController {
             // Ajouter l'employé dans la base de données
             employeService.ajouterEmploye(employe);
             // Ajouter un attribut pour indiquer que l'employé a été ajouté avec succès
-            final String MSG_SUCCES = "L'employé "  + prenom + " " + nom + " a été ajouté avec succès";
+            final String MSG_SUCCES = "L'employé "  + prenom + " " + nom + " a été ajouté avec succès." +
+                    "\nVoici son identifiant : " + nomUtilisateur;
             redirectAttributes.addFlashAttribute("succes", MSG_SUCCES);
+            String msgCourriel = "Bonjour, votre compte d'employé a été " +
+                    "créé. Voici votre nom d'utilisateur : " + nomUtilisateur;
+            String objetCourriel = "";
         }
         return "redirect:/gestion-employe/ajouter-employe";
     }
